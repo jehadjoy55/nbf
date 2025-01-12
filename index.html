@@ -55,8 +55,8 @@
             const urlInput = document.getElementById('urlInput').value;
             const iframe = document.getElementById('browserFrame');
             
-            // Use a free public CORS proxy
-            const proxyUrl = 'https://api.allorigins.win/raw?url=';
+            // Use CORS Proxy (try different public proxies if needed)
+            const proxyUrl = 'https://corsproxy.io/?'; 
             
             if (urlInput.startsWith('http://') || urlInput.startsWith('https://')) {
                 iframe.src = proxyUrl + encodeURIComponent(urlInput);
@@ -67,4 +67,3 @@
     </script>
 </body>
 </html>
-
