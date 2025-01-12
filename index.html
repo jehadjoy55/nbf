@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Browser</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url('00.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+        }
+        .browser-bar {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        .url-input {
+            flex: 1;
+            padding: 8px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        .btn {
+            padding: 8px 15px;
+            background-color: #ff5722;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #e64a19;
+        }
+        iframe {
+            width: 100%;
+            height: calc(100vh - 50px);
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="browser-bar">
+        <input type="text" class="url-input" id="urlInput" placeholder="Enter URL...">
+        <button class="btn" onclick="loadPage()">Go</button>
+    </div>
+    <iframe id="browserFrame" src="https://www.example.com"></iframe>
+
+    <script>
+        function loadPage() {
+            const urlInput = document.getElementById('urlInput').value;
+            const iframe = document.getElementById('browserFrame');
+            
+            // Simple URL validation
+            if (urlInput.startsWith('http://') || urlInput.startsWith('https://')) {
+                iframe.src = urlInput;
+            } else {
+                alert('Please enter a valid URL starting with http:// or https://');
+            }
+        }
+
+        // Placeholder for adult content blocker (basic example)
+        const blockedKeywords = ['adult', 'porn', 'xxx'];
+        
+        document.getElementById('browserFrame').addEventListener('load', function() {
+            const currentURL = this.contentWindow.location.href;
+            if (blockedKeywords.some(keyword => currentURL.includes(keyword))) {
+                alert('Access to this site is blocked!');
+                this.src = 'about:blank';
+            }
+        });
+    </script>
+</body>
+</html>
