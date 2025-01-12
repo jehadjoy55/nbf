@@ -51,27 +51,20 @@
     <iframe id="browserFrame" src="https://www.example.com"></iframe>
 
     <script>
-        async function loadPage() {
+        function loadPage() {
             const urlInput = document.getElementById('urlInput').value;
             const iframe = document.getElementById('browserFrame');
-
-            // Use CORS Anywhere proxy
-            const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
             
-            try {
-                // Send a preflight request to ensure the proxy works
-                await fetch(proxyUrl, { headers: { 'x-requested-with': 'XMLHttpRequest' } });
-
-                // Load the URL via proxy
-                if (urlInput.startsWith('http://') || urlInput.startsWith('https://')) {
-                    iframe.src = proxyUrl + urlInput;
-                } else {
-                    alert('Please enter a valid URL starting with http:// or https://');
-                }
-            } catch (error) {
-                alert('Failed to connect to the proxy. Please try again later.');
+            // Use a free public CORS proxy
+            const proxyUrl = 'https://api.allorigins.win/raw?url=';
+            
+            if (urlInput.startsWith('http://') || urlInput.startsWith('https://')) {
+                iframe.src = proxyUrl + encodeURIComponent(urlInput);
+            } else {
+                alert('Please enter a valid URL starting with http:// or https://');
             }
         }
     </script>
 </body>
 </html>
+
