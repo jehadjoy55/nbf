@@ -55,24 +55,15 @@
             const urlInput = document.getElementById('urlInput').value;
             const iframe = document.getElementById('browserFrame');
             
-            // Simple URL validation
+            // Use CORS Anywhere proxy to bypass iframe restrictions
+            const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+            
             if (urlInput.startsWith('http://') || urlInput.startsWith('https://')) {
-                iframe.src = urlInput;
+                iframe.src = proxyUrl + urlInput;
             } else {
                 alert('Please enter a valid URL starting with http:// or https://');
             }
         }
-
-        // Placeholder for adult content blocker (basic example)
-        const blockedKeywords = ['adult', 'porn', 'xxx'];
-        
-        document.getElementById('browserFrame').addEventListener('load', function() {
-            const currentURL = this.contentWindow.location.href;
-            if (blockedKeywords.some(keyword => currentURL.includes(keyword))) {
-                alert('Access to this site is blocked!');
-                this.src = 'about:blank';
-            }
-        });
     </script>
 </body>
 </html>
